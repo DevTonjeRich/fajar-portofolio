@@ -1,18 +1,53 @@
 import { ArrowUpRight } from 'lucide-react'
 
 const variants = {
-  primary:
-    'bg-primary text-white hover:bg-neutral-800',
-  secondary:
-    'border border-border bg-transparent text-primary hover:bg-surface',
-  ghost:
-    'text-secondary hover:text-primary',
+  primary: `
+    border
+    border-neutral-600
+    bg-transparent
+    text-white
+    hover:bg-blue-600
+    hover:border-blue-600
+    hover:text-white
+    active:bg-blue-700
+    active:border-blue-700
+    focus-visible:outline
+    focus-visible:outline-2
+    focus-visible:outline-blue-500
+    focus-visible:outline-offset-2
+  `,
+
+  secondary: `
+    border
+    border-neutral-600
+    bg-transparent
+    text-white
+    hover:bg-blue-600
+    hover:border-blue-600
+    hover:text-white
+    active:bg-blue-700
+    active:border-blue-700
+    focus-visible:outline
+    focus-visible:outline-2
+    focus-visible:outline-blue-500
+    focus-visible:outline-offset-2
+  `,
+
+  ghost: `
+    text-secondary
+    hover:text-white
+    focus-visible:outline
+    focus-visible:outline-2
+    focus-visible:outline-blue-500
+    focus-visible:outline-offset-2
+  `,
 }
 
 function Button({
   children,
   variant = 'primary',
   href,
+  download = false,
   showArrow = false,
   className = '',
 }) {
@@ -28,28 +63,42 @@ function Button({
     font-medium
     transition-colors
     duration-200
+    hover:-translate-y-0.5
+    active:translate-y-0 
     ${variants[variant]}
     ${className}
   `
 
   if (href) {
     return (
-      <a href={href} className={classes}>
+      <a href={href}
+       download={download}
+       className={classes}>
+          
         {children}
 
         {showArrow && (
-          <ArrowUpRight size={16} strokeWidth={1.8} />
+          <ArrowUpRight
+            size={16}
+            strokeWidth={1.8}
+          />
         )}
       </a>
     )
   }
 
   return (
-    <button type="button" className={classes}>
+    <button
+      type="button"
+      className={classes}
+    >
       {children}
 
       {showArrow && (
-        <ArrowUpRight size={16} strokeWidth={1.8} />
+        <ArrowUpRight
+          size={16}
+          strokeWidth={1.8}
+        />
       )}
     </button>
   )

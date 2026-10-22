@@ -1,59 +1,131 @@
-import { ArrowUpRight } from 'lucide-react'
+import {
+  ArrowUpRight,
+  FileText,
+} from 'lucide-react'
 
-import Badge from '../../../components/ui/Badge'
+import {
+  FaGithub,
+  FaLinkedinIn,
+  FaInstagram,
+  FaEnvelope,
+} from 'react-icons/fa6'
+
+import heroImage from '../../../assets/images/hero-workspace.jpg'
 import Button from '../../../components/ui/Button'
 import PageContainer from '../../../components/layout/PageContainer'
-import Section from '../../../components/ui/Section'
+import RotatingText from '../../../components/ui/RotatingText'
 
 function Hero() {
   return (
-    <Section className="flex min-h-[calc(100vh-5rem)] items-center">
-      <PageContainer>
-        <div className="grid gap-12 lg:grid-cols-[1fr_auto] lg:items-end">
-          
-          <div className="max-w-4xl">
-            <Badge variant="accent">
-              Computer Science · Developer
-            </Badge>
+    <div className="relative overflow-hidden bg-cover bg-center"
+      style={{
+        backgroundImage: `url(${heroImage})`,
+      }}
+    >
+      {/* Background Overlays */}
+      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30" />
 
-            <h1 className="mt-7 text-5xl font-semibold leading-[0.95] tracking-[-0.04em] sm:text-6xl md:text-7xl lg:text-8xl">
-              I build digital
-              <br />
-              products with code.
-            </h1>
+      <PageContainer className="relative z-10">
+        {/* Mengatur padding atas agar pas dan rapat di bawah navbar */}
+        <div className="max-w-4xl pt-16 pb-24 sm:pt-24 sm:pb-32">
 
-            <p className="mt-8 max-w-2xl text-base leading-7 text-secondary sm:text-lg sm:leading-8">
-              I'm Fajar, a Computer Science graduate who enjoys
-              turning ideas and problems into useful digital
-              experiences.
-            </p>
+          {/* Nama Utama */}
+          <h1 className="text-5xl font-semibold tracking-[-0.04em] text-white sm:text-6xl md:text-7xl lg:text-8xl">
+            Hallo, Saya Fajar
+          </h1>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button
-                href="/projects"
-                showArrow
-              >
-                View my work
-              </Button>
-
-              <Button
-                href="/about"
-                variant="secondary"
-              >
-                About me
-              </Button>
-            </div>
+          {/* Sub-heading / Peran dengan RotatingText yang lebih besar */}
+          <div className="mt-4 text-2xl font-medium tracking-tight text-gray-200 sm:text-3xl md:text-4xl">
+            <span>Saya Seorang </span>
+            <span className="text-blue-500 font-semibold">
+              <RotatingText />
+            </span>
           </div>
 
-          <div className="flex items-center gap-3 text-sm text-secondary lg:pb-2">
-            <span className="h-2 w-2 rounded-full bg-accent" />
+          {/* Deskripsi dalam Bahasa Indonesia (Maksimal 3 baris) */}
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-gray-300 sm:text-lg">
+            Saya senang mengulik teknologi, mengolah data, dan merapikan sistem operasional. Fokus saya membantu pekerjaan berjalan lebih efisien lewat kode, data, dan dukungan administratif yang rapi.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="mt-8 flex flex-wrap gap-3">
+
+            <Button
+              href="/work"
+              showArrow
+            >
+              View my work
+            </Button>
+
+            <Button
+              href="/about"
+              variant="secondary"
+            >
+              About me
+            </Button>
+
+            <Button
+              href="/documents/cv_mohammad_rahmi_fajar.pdf"
+              variant="secondary"
+            >
+              <FileText size={16} />
+              Download CV
+            </Button>
+
+          </div>
+
+          {/* Availability */}
+          <div className="mt-8 flex items-center gap-3 text-sm text-gray-300">
+            <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
             Available for opportunities
             <ArrowUpRight size={15} />
           </div>
 
+          {/* Social Links */}
+          <div className="mt-8 flex items-center gap-5">
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="text-gray-400 transition-colors hover:text-white"
+            >
+              <FaGithub size={19} />
+            </a>
+
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="text-gray-400 transition-colors hover:text-white"
+            >
+              <FaLinkedinIn size={18} />
+            </a>
+
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="text-gray-400 transition-colors hover:text-white"
+            >
+              <FaInstagram size={19} />
+            </a>
+
+            <a
+              href="mailto:fajar@email.com"
+              aria-label="Email"
+              className="text-gray-400 transition-colors hover:text-white"
+            >
+              <FaEnvelope size={19} />
+            </a>
+          </div>
+
         </div>
       </PageContainer>
-    </Section>
+    </div>
   )
 }
 

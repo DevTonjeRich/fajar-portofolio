@@ -1,95 +1,186 @@
-import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
-import { Link } from 'react-router-dom'
-
-import PageContainer from './PageContainer'
+import { Link, NavLink } from 'react-router-dom'
+import { useState } from 'react'
+import logoFajar from '../../assets/images/logo-fajar-dev.svg'
 
 const navigation = [
-  {
-    label: 'Work',
-    path: '/projects',
-  },
-  {
-    label: 'About',
-    path: '/about',
-  },
-  {
-    label: 'Contact',
-    path: '/contact',
-  },
+  { label: 'Home', path: '/' },
+  { label: 'About Me', path: '/about' },
+  { label: 'Portfolio', path: '/work' },
+  { label: 'Contact Me', path: '/contact' },
 ]
 
+const email = 'muhammadrahmifajar69@gmail.com'
+
 function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+
+  const closeMenu = () => setIsOpen(false)
 
   return (
-    <header className="border-b border-border">
-      <PageContainer>
+    <header className="sticky top-0 z-50 border-b border-border bg-black/95 backdrop-blur-sm">
+      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-10">
 
-        {/* Navigation Bar */}
-        <nav className="flex h-20 items-center justify-between">
+        {/* Logo */}
+        <Link
+          to="/"
+          viewTransition
+          onClick={closeMenu}
+          className="flex items-center transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
+        >
+          <img 
+            src={logoFajar} 
+            alt="Fajar.dev Logo" 
+            className="h-8 w-auto" 
+          />
+        </Link>
 
-          {/* Logo */}
-          <Link
-            to="/"
-            className="text-sm font-semibold tracking-tight"
-          >
-            FAJAR.DEV
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden items-center gap-8 md:flex">
+        {/* Desktop Navigation */}
+          <div className="hidden items-center gap-6 md:absolute md:left-1/2 md:-translate-x-1/2 md:flex">
             {navigation.map((item) => (
-              <Link
+              <NavLink
                 key={item.path}
                 to={item.path}
-                className="text-sm text-secondary transition-colors hover:text-primary"
+                viewTransition
+                className={({ isActive }) =>
+                  [
+                    'rounded-full',
+                    'px-5',
+                    'py-2.5',
+                    'text-sm',
+                    'font-medium',
+                    'transition-all',
+                    'duration-200',
+                    isActive
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-transparent text-white hover:bg-blue-600 hover:text-white',
+                  ].join(' ')
+                }
               >
                 {item.label}
-              </Link>
+              </NavLink>
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            aria-label={
-              menuOpen
-                ? 'Close navigation menu'
-                : 'Open navigation menu'
-            }
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((current) => !current)}
-            className="flex items-center justify-center rounded-full p-2 text-secondary hover:text-primary md:hidden"
+          {/* Hire Me */}
+          <a
+            href={email}
+            className="
+              absolute
+              right-6
+              hidden
+              rounded-full
+              border
+              border-blue-600
+              bg-blue-600
+              px-5
+              py-2.5
+              text-sm
+              font-medium
+              text-white
+              transition-all
+              duration-200
+              hover:bg-transparent
+              hover:text-blue-500
+              sm:right-8
+              md:block
+              lg:right-10
+            "
           >
-            {menuOpen ? (
-              <X size={21} strokeWidth={1.8} />
-            ) : (
-              <Menu size={21} strokeWidth={1.8} />
-            )}
-          </button>
+            Hire Me
+          </a>
 
-        </nav>
+        {/* Mobile Menu Button */}
+        <button
+          type="button"
+          onClick={() => setIsOpen((prev) => !prev)}
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isOpen}
+          className="
+            flex
+            h-10
+            w-10
+            items-center
+            justify-center
+            rounded-full
+            border
+            border-border
+            text-white
+            transition-colors
+            duration-200
+            hover:border-blue-500
+            hover:text-blue-500
+            md:hidden
+          "
+        >
+          {isOpen ? (
+            <X size={19} strokeWidth={1.8} />
+          ) : (
+            <Menu size={19} strokeWidth={1.8} />
+          )}
+        </button>
+      </nav>
 
-        {/* Mobile Navigation */}
-        {menuOpen && (
-          <div className="border-t border-border py-6 md:hidden">
-            <div className="flex flex-col gap-5">
-              {navigation.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setMenuOpen(false)}
-                  className="text-lg text-secondary transition-colors hover:text-primary"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
+      {/* Mobile Navigation */}
+      {isOpen && (
+        <div className="border-t border-border md:hidden">
+          <div className="mx-auto flex max-w-7xl flex-col px-6 py-4 sm:px-8">
+
+            {navigation.map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                viewTransition
+                onClick={closeMenu}
+                className={({ isActive }) =>
+                  `
+                  border-b
+                  border-border
+                  py-4
+                  text-sm
+                  font-medium
+                  transition-colors
+                  duration-200
+                  ${
+                    isActive
+                      ? 'text-blue-500'
+                      : 'text-white hover:text-blue-500'
+                  }
+                  `
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+
+            {/* Mobile Hire Me */}
+            <a
+              href={email}
+              onClick={closeMenu}
+              className="
+                mt-4
+                rounded-full
+                border
+                border-blue-600
+                bg-blue-600
+                px-5
+                py-3
+                text-center
+                text-sm
+                font-medium
+                text-white
+                transition-all
+                duration-200
+                hover:bg-transparent
+                hover:text-blue-500
+              "
+            >
+              Hire Me
+            </a>
+
           </div>
-        )}
-
-      </PageContainer>
+        </div>
+      )}
     </header>
   )
 }
