@@ -1,7 +1,6 @@
 import { Menu, X } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
 import { useState } from 'react'
-import logoFajar from '../../assets/images/logo-fajar-dev.svg'
 
 const navigation = [
   { label: 'Home', path: '/' },
@@ -19,21 +18,18 @@ function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-black/95 backdrop-blur-sm">
-      {/* Diperbarui: Padding mobile disesuaikan (px-4 sm:px-8) agar ruang logo lebih lega */}
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-8 lg:px-10">
 
-        {/* Logo - Diperbarui: Tambahkan shrink-0 dan penyesuaian ukuran h-7 sm:h-8 */}
+        {/* Logo Text: My.Portofolio */}
         <Link
           to="/"
           viewTransition
           onClick={closeMenu}
-          className="flex shrink-0 items-center transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
+          className="flex shrink-0 items-center transition-all duration-200 hover:opacity-80"
         >
-          <img 
-            src={logoFajar} 
-            alt="Fajar.dev Logo" 
-            className="h-7 w-auto object-contain sm:h-8" 
-          />
+          <span className="text-xl font-bold tracking-tight text-white sm:text-2xl">
+            My<span className="text-blue-500">.Portofolio</span>
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -91,7 +87,7 @@ function Navbar() {
           Hire Me
         </a>
 
-        {/* Mobile Menu Button - Diperbarui: Tambahkan shrink-0 */}
+        {/* Mobile Menu Button */}
         <button
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
