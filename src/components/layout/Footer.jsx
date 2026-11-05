@@ -65,16 +65,13 @@ function Footer() {
               to="/"
               className="inline-block transition-opacity duration-200 hover:opacity-80"
             >
-              <img 
-                src={logoFajar} 
-                alt="Fajar.dev Logo" 
-                className="h-5 w-auto" // Anda bisa mengubah ukurannya misal h-7 atau h-8 sesuai kebutuhan
-              />
+                <span className="text-xl font-bold tracking-tight text-white sm:text-2xl">
+                  My<span className="text-blue-500">.Portofolio</span>
+                </span>
             </Link>
 
             <p className="mt-5 max-w-xs text-sm leading-6 text-neutral-400">
-              Computer Science graduate building digital
-              products with code.
+             Seorang lulusan Ilmu Komputer yang hobi mewujudkan ide menjadi produk digital yang berguna untuk digunakan.
             </p>
             
           </div>
